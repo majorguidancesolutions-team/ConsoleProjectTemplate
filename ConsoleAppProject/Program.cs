@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleAppProject;
 
@@ -27,6 +25,8 @@ public class Program
             })
             .ConfigureServices((context, services) =>
             {
+                var itWorks = context.Configuration["Test:Setting1"];
+                Console.WriteLine($"Configuration Test: ItWorks = {itWorks}");
                 // Add other services here if needed
                 services.AddTransient<Application>();
             }).Build();
