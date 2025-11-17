@@ -3,10 +3,6 @@ namespace ConsoleHelpers;
 
 public class InputHelpers
 {
-    //TODO: Get user input from console with range validation to return a double
-    //              , bonus: optional ask if they want to confirm the value
-
-
     /// <summary>
     /// <param name="prompt">The question to ask the user</param>
     /// <param name="min">Inclusive minimum value [defaults to double.MinValue]</param>
@@ -47,4 +43,60 @@ public class InputHelpers
         }
         return result;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="prompt"></param>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    /// <param name="confirm"></param>
+    /// <returns></returns>
+    public static int GetInputAsInt(string prompt, 
+                                    int min = int.MinValue, 
+                                    int max = int.MaxValue, 
+                                    bool confirm = false)
+    {
+        double result = GetInputAsDouble(prompt, min, max, confirm);
+        
+        //if (result is not a whole integer number)
+        // ask again...
+        while(result % 1.0 != 0)
+        {
+            Console.WriteLine("Please enter a non-decimal value");
+            result = GetInputAsDouble(prompt, min, max, confirm);
+        }
+
+        return Convert.ToInt32(result); 
+    }
+    //TODO: Input as boolean
+    public static bool GetInputAsBool(string prompt,
+                                        bool confirm = false)
+    {
+        bool startsWithN = false;
+        bool startsWithY = false;
+        bool success = false;
+        while(!success)
+        {
+            Console.WriteLine($"{prompt}(Y/N)?");
+            string confirmation = Console.ReadLine() ?? string.Empty;
+            startsWithY = confirmation.StartsWith("y", StringComparison.OrdinalIgnoreCase);
+            startsWithN = confirmation.StartsWith("n", StringComparison.OrdinalIgnoreCase);
+            if(startsWithY || startsWithN)
+            {
+                success = true;
+                break;
+            }
+            Console.WriteLine("invalid input");
+            
+        }
+
+
+        //if they say "y" || "Y" || "yes" || "Yes" || "YES" || "YeS" || "Yellow" 
+        // we will assume they are saying we got it correct.
+       
+        return startsWithY;
+          
+    }
+    //TODO: Input as string
 }
