@@ -1,4 +1,6 @@
-﻿namespace ConsoleAppProject.Menus;
+﻿using ConsoleHelpers;
+
+namespace ConsoleAppProject.Menus;
 
 public class MainMenu
 {
@@ -10,7 +12,11 @@ public class MainMenu
     //TODO: Inject Menu Dependencies
     public MainMenu()
     {
-
+        string prompt = "Please enter your favorite constant";
+        double min = 0;
+        double max = 100;
+        double result = InputHelpers.GetInputAsDouble(prompt, min, max, true);
+        Console.WriteLine($"You entered {result}");
     }
 
     public async Task ShowAsync()
