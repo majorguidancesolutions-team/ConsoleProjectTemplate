@@ -45,13 +45,13 @@ public class InputHelpers
     }
 
     /// <summary>
-    /// 
+    /// Gets an integer input from the user
     /// </summary>
-    /// <param name="prompt"></param>
-    /// <param name="min"></param>
-    /// <param name="max"></param>
-    /// <param name="confirm"></param>
-    /// <returns></returns>
+    /// <param name="prompt">The question to ask the user</param>
+    /// <param name="min">min value to allow [defaults to int.MinValue]</param>
+    /// <param name="max">max value to allow [defaults to int.MaxValue]</param>
+    /// <param name="confirm">Allow hook to ask for confirmation of input</param>
+    /// <returns>Valid integer input from the user</returns>
     public static int GetInputAsInt(string prompt, 
                                     int min = int.MinValue, 
                                     int max = int.MaxValue, 
@@ -69,7 +69,13 @@ public class InputHelpers
 
         return Convert.ToInt32(result); 
     }
-    //TODO: Input as boolean
+    
+    /// <summary>
+    /// Gets a boolean input from the user
+    /// </summary>
+    /// <param name="prompt">The question to ask the user</param>
+    /// <param name="confirm">Hook to allow user to validate their choice [optional]</param>
+    /// <returns>Choice of true/false from prompt</returns>
     public static bool GetInputAsBool(string prompt,
                                         bool confirm = false)
     {
@@ -91,12 +97,13 @@ public class InputHelpers
             
         }
 
+        //TODO: Need to confirm if asked to confirm
+        
 
-        //if they say "y" || "Y" || "yes" || "Yes" || "YES" || "YeS" || "Yellow" 
-        // we will assume they are saying we got it correct.
-       
+        //true if they say "y" || "Y" || "yes" || "Yes" || "YES" || "YeS" || "Yellow" 
         return startsWithY;
           
     }
+    
     //TODO: Input as string
 }
