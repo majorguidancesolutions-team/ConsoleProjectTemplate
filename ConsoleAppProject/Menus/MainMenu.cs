@@ -14,7 +14,7 @@ public class MainMenu
     {
         //ShowInputHelpers();
         
-        ShowFormattedMessages();
+        //ShowFormattedMessages();
     }
 
     private void ShowFormattedMessages()
@@ -68,15 +68,58 @@ public class MainMenu
 
     public async Task ShowAsync()
     {
-        Console.WriteLine("Menu is not yet implemented...");
-        await Task.Delay(1);  //delete me
+        bool shouldContinue = true;
+        while (shouldContinue)
+        {
+            Console.Clear();
 
-        //should continue?
+            string[] menuOptions = GetMenuOptions();
 
-        //print menu and get user choice
+            var menuText = MenuGenerator.GenerateMenu("Main Menu", "Please select an operation", menuOptions, 40);
 
+            // Show menu and get user choice
+            int choice = InputHelpers.GetInputAsInt(menuText, confirm: true, min: 1, max: menuOptions.Length);
 
+            try
+            {
+                shouldContinue = await HandleMenuChoiceAsync(choice);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
     }
 
     //handle user choice
+    private async Task<bool> HandleMenuChoiceAsync(int choice)
+    {
+        switch (choice)
+        {
+            case 1:
+                ShowFormattedMessages();
+                break;
+            case 2:
+                ShowInputHelpers();
+                break;
+            default:
+                return false;
+        }
+
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        return true;
+    }
+
+    private string[] GetMenuOptions()
+    {
+        return new string[] {
+            "Show formatted Messages",
+            "Show Input Helpers",
+            "Show Stocks",
+            "Exit"
+        };
+    }
 }

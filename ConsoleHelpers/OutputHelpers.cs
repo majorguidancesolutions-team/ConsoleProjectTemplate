@@ -63,6 +63,55 @@ public class OutputHelpers
         return sb.ToString();
     }
 
+    //output a string to the console in a box with a header
+    //*******************************
+    //* Header goes here            *
+    //*******************************
+    //*-----------------------------*
+    //* SOME STRING HERE            *
+    //*-----------------------------*
+    //*-----------------------------*
+    //* SOME STRING HERE            *
+    //*-----------------------------*
+    //*-----------------------------*
+    //* SOME STRING HERE            *
+    //*-----------------------------*
+    //*-----------------------------*
+    //* SOME STRING HERE            *
+    //*-----------------------------*
+    //*******************************
+    public static string BoxedArrayWithTitle(string title, string[] items, int lineLength=80)
+    {
+        string separatorDashes = $"*{new string('-', lineLength - 2)}*";
+        string separatorStars = new string('*', lineLength);
+        
+        StringBuilder sb = new StringBuilder();
+
+        sb.Append(BoxedMessage(title, '*'));
+        
+        //** each item needs to print here
+        int i = 0; 
+        foreach(var item in items)
+        {
+            i++;
+            //message top
+            //sb.AppendLine(separatorDashes);
+            //message indicator + message + spaces + message indicator
+            var actualDataString = $"* {item}".PadRight(lineLength - 1, ' ');
+            sb.AppendLine($"{actualDataString}*");
+            //message bottom
+            if (i < items.Length)
+            {
+                sb.AppendLine(separatorDashes);
+            }
+        }
+
+        //close the box
+        sb.AppendLine(separatorStars);
+
+        return sb.ToString();
+
+    }
     //output a list to the console in a box
 
     //output a list to the console in a box with a header
