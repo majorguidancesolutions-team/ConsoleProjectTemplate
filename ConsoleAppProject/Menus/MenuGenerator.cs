@@ -29,9 +29,6 @@ public class MenuGenerator
                                             , List<string> menuOptions
                                             , int lineLength)
     {
-        return "not yet implemented";
-
-        //TODO: generate a string to represent the menu
-        //TODO: Return the menu as a string for use in the application
+        return GenerateMenu(menuHeader, menuPrompt, menuOptions.ToArray(), lineLength);
     }
 }

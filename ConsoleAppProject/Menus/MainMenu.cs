@@ -6,15 +6,12 @@ public class MainMenu
 {
     //private variables for various menus
 
-    //get menu options
+    
 
 
     //TODO: Inject Menu Dependencies
     public MainMenu()
     {
-        //ShowInputHelpers();
-        
-        //ShowFormattedMessages();
     }
 
     private void ShowFormattedMessages()
@@ -35,9 +32,6 @@ public class MainMenu
         string prompt = "Please enter your favorite constant";
         double min = 0;
         double max = 100;
-        // double sample1 = InputHelpers.GetInputAsDouble(prompt);
-        // double sample2 = InputHelpers.GetInputAsDouble(prompt, confirm: true);
-        // double sample3 = InputHelpers.GetInputAsDouble(prompt, min, confirm:true);
         
         double result = InputHelpers.GetInputAsDouble(prompt, min, max, true);
         Console.WriteLine($"You entered {result}");
@@ -113,12 +107,12 @@ public class MainMenu
         return true;
     }
 
+    //get menu options
     private string[] GetMenuOptions()
     {
         return new string[] {
             "Show formatted Messages",
             "Show Input Helpers",
-            "Show Stocks",
             "Exit"
         };
     }
