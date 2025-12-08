@@ -1,9 +1,9 @@
-﻿
-namespace ConsoleHelpers;
+﻿namespace ConsoleHelpers;
 
 public class InputHelpers
 {
     /// <summary>
+    /// Gets a double input from the user
     /// <param name="prompt">The question to ask the user</param>
     /// <param name="min">Inclusive minimum value [defaults to double.MinValue]</param>
     /// <param name="max">Inclusive maximum value [defaults to double.MaxValue]</param>
@@ -64,17 +64,38 @@ public class InputHelpers
                                     int max = int.MaxValue, 
                                     bool confirm = false)
     {
-        double result = GetInputAsDouble(prompt, min, max, confirm);
+        bool isValidInteger = false;
+        int result = 0;
         
-        //if (result is not a whole integer number)
-        // ask again...
-        while(result % 1.0 != 0)
+        while (!isValidInteger)
         {
-            Console.WriteLine("Please enter a non-decimal value");
-            result = GetInputAsDouble(prompt, min, max, confirm);
+            Console.WriteLine(prompt);
+            string input = Console.ReadLine() ?? string.Empty;
+            
+            if (!int.TryParse(input, out result))
+            {
+                Console.WriteLine("Please enter a valid integer");
+                continue;
+            }
+            
+            if (result < min || result > max)
+            {
+                Console.WriteLine($"Please enter a value within defined parameters {min}, {max}");
+                continue;
+            }
+            
+            if (confirm)
+            {
+                string confirmationPrompt = $"You entered {result}, is this correct?";
+                isValidInteger = GetInputAsBool(confirmationPrompt, false);
+            }
+            else
+            {
+                isValidInteger = true;
+            }
         }
-
-        return Convert.ToInt32(result); 
+        
+        return result;
     }
     
     /// <summary>
@@ -106,16 +127,14 @@ public class InputHelpers
             Console.WriteLine("invalid input");
         }
         
-        //Need to confirm if asked to confirm
         if(confirm)
         { 
-            //Prompt user to confirm their selection
             string confirmationPrompt = ($"You entered {confirmation} are you sure?:");
             var correctInput = GetInputAsBool(confirmationPrompt, false);
 
             if (!correctInput)
             {
-                startsWithY = GetInputAsBool(prompt, true);
+                return GetInputAsBool(prompt, confirm);
             }
         }
 
@@ -123,20 +142,26 @@ public class InputHelpers
         return startsWithY;
     }
     
-    // get an input as string from the user
     /// <summary>
-    /// As the user for string input
+    /// Ask the user for string input
     /// </summary>
     /// <param name="prompt">The question you want to ask</param>
-    /// <param name="confirm">Optional ability to confirm user input 
+    /// <param name="confirm">Optional ability to confirm user input</param>
+    /// <param name="allowEmpty">Allow empty strings [defaults to true]</param>
     /// <returns>The string they entered and potentially confirmed</returns>
-    public static string GetInputAsString(string prompt, bool confirm = false)
+    public static string GetInputAsString(string prompt, bool confirm = false, bool allowEmpty = true)
     {
         while(true)
         {
             bool correctInput = false;
             Console.WriteLine(prompt);
             string input = Console.ReadLine() ?? string.Empty;
+            
+            if (!allowEmpty && string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine("Input cannot be empty. Please try again.");
+                continue;
+            }
             
             // confirmation logic
             if (confirm)
@@ -150,26 +175,5 @@ public class InputHelpers
                 return input;
             }
         }
-    }  
-
-    public static string GetInputAsStringNoWhileTrue(string prompt, bool confirm = false)
-    {
-        bool correctInput = false;
-        string input = string.Empty;
-        while (!correctInput)
-        {
-            Console.WriteLine(prompt);
-            input = Console.ReadLine() ?? string.Empty;
-            
-            // confirmation logic
-            if (confirm)
-            {
-                string promptConfirm = $"You entered {input}, is this correct";
-                correctInput = GetInputAsBool(promptConfirm, false);
-                continue;
-            }
-        }
-            
-        return input;
     }  
 }
