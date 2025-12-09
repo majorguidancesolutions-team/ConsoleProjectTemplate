@@ -11,10 +11,9 @@ public class DemonstrateConsoleHelpers
         var response = InputHelpers.GetInputAsString(prompt);
         Console.WriteLine(OutputHelpers.BoxedMessage(response, '*'));
         Console.WriteLine(OutputHelpers.BoxedMessage(response, '-'));
-        string tooLong = "asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf";
+        string tooLong = "Learning C# is like discovering a secret superpower. Each class, method, and interface unlocks new worlds. Stick with it, have fun, and watch your coding skills level up!";
         Console.WriteLine(OutputHelpers.BoxedMessage(tooLong, '-'));
-        Console.WriteLine(new string('~', 40));
-
+        Console.WriteLine(new string('~', Application.LINE_LENGTH));
         Console.WriteLine(OutputHelpers.BoxedMessageWithTitle("Welcome", response));
     }
 

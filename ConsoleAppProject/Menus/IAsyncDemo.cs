@@ -3,6 +3,6 @@
 public interface IAsyncDemo
 {
     List<string> MenuOptions();
-    Task ShowAsync();
+    Task ShowAsync(string title);
     Task<bool> HandleMenuChoiceAsync(int choice);
 }

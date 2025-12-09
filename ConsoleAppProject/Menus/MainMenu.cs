@@ -2,7 +2,7 @@
 
 namespace ConsoleAppProject.Menus;
 
-public class MainMenu : IAsyncDemo
+public class MainMenu : BaseMenu
 {
     //private variables for various menus
     private ConsoleHelpersDemonstrationsMenu _consoleHelpersDemoMenu;
@@ -13,47 +13,25 @@ public class MainMenu : IAsyncDemo
         _consoleHelpersDemoMenu = new ConsoleHelpersDemonstrationsMenu();
     }
 
-    public async Task ShowAsync()
-    {
-        bool shouldContinue = true;
-        while (shouldContinue)
-        {
-            Console.Clear();
-
-            var menuText = MenuGenerator.GenerateMenu("Main Menu", "Please select an operation", MenuOptions(), 40);
-
-            // Show menu and get user choice
-            int choice = InputHelpers.GetInputAsInt(menuText, confirm: true, min: 1, max: MenuOptions().Count);
-
-            try
-            {
-                shouldContinue = await HandleMenuChoiceAsync(choice);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-        }
-    }
-
     //handle user choice
-    public async Task<bool> HandleMenuChoiceAsync(int choice)
+    public override async Task<bool> HandleMenuChoiceAsync(int choice)
     {
         IAsyncDemo nextDemo = _consoleHelpersDemoMenu;
+        string title = "Console Helpers Demonstrations";
         switch (choice)
         {
             case 1:
                 nextDemo = _consoleHelpersDemoMenu;
+                title = "Console Helpers Demonstrations";
                 break;
             case 2:
-                //add additional menus here, and break out:
+            //add additional menus here, and break out:
+            //title = "Other Menu";
             default:
                 return false;
         }
 
-        await nextDemo.ShowAsync();
+        await nextDemo.ShowAsync(title);
 
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
@@ -61,7 +39,7 @@ public class MainMenu : IAsyncDemo
     }
 
     //get menu options
-    public List<string> MenuOptions() => new List<string>() {
+    public override List<string> MenuOptions() => new List<string>() {
             "Console Helpers Demo",
             "Exit"
     };

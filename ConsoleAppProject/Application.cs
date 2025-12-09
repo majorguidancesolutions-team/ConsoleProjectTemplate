@@ -7,6 +7,7 @@ public class Application
 {
     private readonly MainMenu _menu;
     private readonly IConfiguration _configuration;
+    public const int LINE_LENGTH = 40;
 
     public Application(IConfiguration configuration)
     {
@@ -21,7 +22,7 @@ public class Application
     {
         Console.WriteLine("Welcome to the YourProjectNameHere");
 
-        await _menu.ShowAsync();
+        await _menu.ShowAsync("Main Menu");
 
         Console.WriteLine("Thank you for using the YourProjectNameHere");
     }

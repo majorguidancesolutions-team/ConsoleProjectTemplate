@@ -20,7 +20,7 @@ public class MenuGenerator
         {
             sb.AppendLine($"{i++}] {line}");
         }
-        sb.AppendLine(new string('*', 40));
+        sb.AppendLine(new string('*', Application.LINE_LENGTH));
         return sb.ToString();
     }
 
