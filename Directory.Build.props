@@ -1,6 +1,16 @@
 <Project>
     <PropertyGroup>
         <TargetFrameworkVersion>net10.0</TargetFrameworkVersion>
-        <Microsoft_Extensions_Hosting_Version>10.0.0</Microsoft_Extensions_Hosting_Version>
-    </PropertyGroup>
+        <MicrosoftExtensionsHostingVersion>10.0.1</MicrosoftExtensionsHostingVersion>
+		<MicrosoftExtensionsConfigurationVersion>10.0.1</MicrosoftExtensionsConfigurationVersion>
+		<MicrosoftExtensionsConfigurationJsonVersion>10.0.1</MicrosoftExtensionsConfigurationJsonVersion>
+		<MicrosoftExtensionsEnvironmentVariablesConfigurationVersion>10.0.0</MicrosoftExtensionsEnvironmentVariablesConfigurationVersion>
+		<MicrosoftExtensionsConfigurationUserSecretsVersion>10.0.1</MicrosoftExtensionsConfigurationUserSecretsVersion>
+		<MicrosoftExtensionsDependencyInjectionVersion>10.0.1</MicrosoftExtensionsDependencyInjectionVersion>
+		<SerilogVersion>4.3.1-dev-02373</SerilogVersion>
+		<SerilogExtensionsHostingVersion>10.0.0</SerilogExtensionsHostingVersion>
+		<SerilogSettingsConfigurationVersion>10.0.0</SerilogSettingsConfigurationVersion>
+		<SerilogSinksConsoleVersion>6.1.1</SerilogSinksConsoleVersion>
+		<SerilogSinksFileVersion>7.0.0</SerilogSinksFileVersion>
+	</PropertyGroup>
 </Project>
