@@ -4,16 +4,13 @@ namespace ConsoleAppProject.Menus;
 
 public class MainMenu : BaseMenu
 {
-    //private variables for various menus
     private ConsoleHelpersDemonstrationsMenu _consoleHelpersDemoMenu;
 
-    //TODO: or Inject Menu Dependencies
     public MainMenu()
     {
         _consoleHelpersDemoMenu = new ConsoleHelpersDemonstrationsMenu();
     }
 
-    //handle user choice
     public override async Task<bool> HandleMenuChoiceAsync(int choice)
     {
         IAsyncDemo nextDemo = _consoleHelpersDemoMenu;
