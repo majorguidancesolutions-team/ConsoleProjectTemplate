@@ -176,4 +176,10 @@ public class InputHelpers
             }
         }
     }  
+
+    public static void WaitForUserInput()
+    {
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+    }
 }
