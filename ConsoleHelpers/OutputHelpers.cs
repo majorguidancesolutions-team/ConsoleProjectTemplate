@@ -33,7 +33,7 @@ public class OutputHelpers
         //return the formatted message;
         return sb.ToString();
     }
-    
+
     //output a string to the console in a box with a header
     //*******************************
     //* Header goes here            *
@@ -41,16 +41,16 @@ public class OutputHelpers
     //*-----------------------------*
     //* SOME STRING HERE            *
     //*-----------------------------*
-    
-    public static string BoxedMessageWithTitle(string title, string message, int lineLength=80)
+
+    public static string BoxedMessageWithTitle(string title, string message, int lineLength = 80)
     {
         string separatorDashes = $"*{new string('-', lineLength - 2)}*";
         string separatorStars = new string('*', lineLength);
-        
+
         StringBuilder sb = new StringBuilder();
 
         sb.Append(BoxedMessage(title, '*'));
-        
+
         //message top
         sb.AppendLine(separatorDashes);
         //message indicator + message + spaces + message indicator
@@ -80,18 +80,18 @@ public class OutputHelpers
     //* SOME STRING HERE            *
     //*-----------------------------*
     //*******************************
-    public static string BoxedArrayWithTitle(string title, string[] items, int lineLength=80)
+    public static string BoxedArrayWithTitle(string title, string[] items, int lineLength = 80)
     {
         string separatorDashes = $"*{new string('-', lineLength - 2)}*";
         string separatorStars = new string('*', lineLength);
-        
+
         StringBuilder sb = new StringBuilder();
 
         sb.Append(BoxedMessage(title, '*'));
-        
+
         //** each item needs to print here
-        int i = 0; 
-        foreach(var item in items)
+        int i = 0;
+        foreach (var item in items)
         {
             i++;
             //message top
@@ -112,8 +112,74 @@ public class OutputHelpers
         return sb.ToString();
 
     }
+
+
     //output a list to the console in a box
+    //*******************************
+    //* SOME STRING HERE            *
+    //*******************************
+    //* SOME STRING HERE            *
+    //*******************************
+    //* SOME STRING HERE            *
+    //*******************************
+    public static string BoxedList(List<string> items, char borderChar, int lineLength = 80)
+    {
+        string separatorString = new string(borderChar, lineLength);
+        var borderIndicator = borderChar == '*' ? "*" : "|";
+
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(separatorString);
+
+        foreach (var item in items)
+        {
+            sb.Append(borderIndicator);
+            var actualDataString = $" {item}".PadRight(lineLength - 2, ' ');
+            sb.Append(actualDataString);
+            sb.AppendLine(borderIndicator);
+        }
+
+        sb.AppendLine(separatorString);
+        return sb.ToString();
+    }
 
     //output a list to the console in a box with a header
-    
+    //*******************************
+    //* Header goes here            *
+    //*******************************
+    //*-----------------------------*
+    //* SOME STRING HERE            *
+    //*-----------------------------*
+    //* SOME STRING HERE            *
+    //*-----------------------------*
+    //* SOME STRING HERE            *
+    //*-----------------------------*
+    //*-----------------------------*
+    //* SOME STRING HERE            *
+    //*-----------------------------*
+    //*******************************
+    public static string BoxedListWithTitle(string title, List<string> items, int lineLength = 80)
+    {
+        string separatorDashes = $"*{new string('-', lineLength - 2)}*";
+        string separatorStars = new string('*', lineLength);
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.Append(BoxedMessage(title, '*'));
+
+        int i = 0;
+        foreach (var item in items)
+        {
+            i++;
+            var actualDataString = $"* {item}".PadRight(lineLength - 1, ' ');
+            sb.AppendLine($"{actualDataString}*");
+            if (i < items.Count)
+            {
+                sb.AppendLine(separatorDashes);
+            }
+        }
+
+        sb.AppendLine(separatorStars);
+        return sb.ToString();
+    }
+
 }

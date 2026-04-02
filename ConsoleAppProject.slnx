@@ -4,4 +4,5 @@
   </Folder>
   <Project Path="ConsoleAppProject/ConsoleAppProject.csproj" />
   <Project Path="ConsoleHelpers/ConsoleHelpers.csproj" Id="23e21561-dba0-435a-86f9-95181d94d999" />
+  <Project Path="TestConsoleHelpers/TestConsoleHelpers.csproj" Id="550f2f44-1aec-4261-a863-2775a1f520cf" />
 </Solution>
